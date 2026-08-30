@@ -1,0 +1,69 @@
+generated: '2026-08-30'
+method: derived
+source: >-
+  https://github.com/traderinteractive/tol-api-php/blob/master/src/Authentication.php,
+  https://github.com/traderinteractive/tol-api-php/blob/master/README.md,
+  https://github.com/traderinteractive/tol-api-nodejs/blob/master/index.js
+note: >-
+  Trader Interactive publishes no authentication documentation. This profile is derived from the source
+  of the two first-party TOL API clients the company maintains, which is the only public description of
+  how the TraderOnline API authenticates. It is not a substitute for a published auth reference.
+api: TraderOnline (TOL) API
+base_url: https://api.traderonline.com
+primary_scheme: oauth2
+schemes:
+  - id: oauth2_client_credentials
+    type: oauth2
+    flow: clientCredentials
+    token_url: '{baseUrl}/token'
+    parameters:
+      - client_id
+      - client_secret
+      - grant_type=client_credentials
+    default: true
+    evidence: >-
+      tol-api-php Authentication::createClientCredentials() posts
+      {client_id, client_secret, grant_type: client_credentials} to "{baseUrl}/{tokenResource}" where
+      tokenResource defaults to "token"; tol-api-nodejs createClient() wires
+      getClientCredentialsToken(apiUrl + '/token', clientId, clientSecret).
+  - id: oauth2_password
+    type: oauth2
+    flow: password
+    token_url: '{baseUrl}/token'
+    parameters:
+      - client_id
+      - client_secret
+      - username
+      - password
+      - grant_type=password
+    default: false
+    evidence: >-
+      tol-api-php Authentication::createResourceOwnerPasswordCredentials() and
+      tol-api-nodejs getResourceOwnerPasswordCredentialsToken().
+  - id: oauth2_refresh_token
+    type: oauth2
+    flow: refreshToken
+    token_url: '{baseUrl}/{refreshResource}'
+    default: false
+    evidence: >-
+      Both clients implement refresh-token exchange. The PHP client exposes refreshResource separately
+      from tokenResource with the comment "Only needed since apigee doesnt use the token resource that is
+      in the oauth2 spec", indicating the TOL API is (or was) fronted by Apigee with a non-standard
+      refresh endpoint.
+token_transport: Authorization bearer header on every request
+token_refresh: >-
+  Clients re-authenticate automatically on HTTP 401 with body error "invalid_grant"
+  (tol-api-nodejs isExpiredToken()).
+scopes:
+  documented: false
+  note: >-
+    No scope or permission reference is published. tol-api-nodejs exposes
+    handleGenericTokenWithScope(), so the TOL API supports scoped tokens, but the scope vocabulary is
+    not public. No scopes/ artifact is written rather than inventing scope names.
+credential_issuance: >-
+  Not self-serve. Client id / client secret are issued to dealers and syndication partners through the
+  TraderTraxx dealer relationship; there is no public signup for API credentials.
+gaps:
+  - No published authentication documentation on any Trader Interactive property.
+  - No /.well-known/oauth-authorization-server or /.well-known/openid-configuration on any host.
+  - Token endpoint path is documented only as "{baseUrl}/token" in client source; not independently verifiable anonymously.

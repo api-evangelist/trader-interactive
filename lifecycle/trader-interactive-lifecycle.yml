@@ -1,0 +1,51 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  https://www.traderinteractive.com/ (site crawl 2026-08-30), https://github.com/traderinteractive,
+  https://packagist.org/packages/traderinteractive/tol-api, probe of https://status.traderinteractive.com/
+note: >-
+  Nothing in Trader Interactive's public surface constitutes an API lifecycle policy. Recorded here as an
+  honest absence. No StatusPage and no Deprecation pointer is emitted, because neither exists.
+api: TraderOnline (TOL) API
+versioning:
+  scheme: path
+  pattern: '{baseUrl}/v{n}'
+  current_version: v1
+  current_version_evidence: >-
+    The only version named in first-party client documentation is v1
+    (tol-api-php README: 'https://baseApiUrl/v1').
+  policy_published: false
+deprecation:
+  policy_published: false
+  sunset_header: unknown
+  deprecation_header: unknown
+  rfc8594: false
+  deprecated_operations: []
+  note: No deprecation or sunset policy is published, and no OpenAPI exists to derive deprecations from.
+status_page:
+  present: false
+  url: null
+  evidence:
+    - url: https://status.traderinteractive.com/
+      status: '<no response — DNS did not resolve>'
+  note: >-
+    No status page was found on any Trader Interactive property. Marketplace uptime is not publicly
+    reported.
+sla:
+  published: false
+  note: >-
+    No API SLA is published. Dealer advertising agreements are governed by the Advertiser Agreement
+    (https://www.traderinteractive.com/advertiser-agreement/), which is a commercial document, not a
+    service-level commitment for an API.
+change_log:
+  api_changelog_published: false
+  note: >-
+    No API changelog exists. The only dated release history the company publishes is the tag/release
+    history of the first-party client libraries (traderinteractive/tol-api v5.1.0, 2024-11-11;
+    npm tol-api 0.8.11, 2022-05-09), which tracks the client, not the API. No ChangeLog pointer is
+    emitted, because an SDK tag history is not an API changelog.
+corporate:
+  ownership: >-
+    Wholly owned by CAR Group Limited (formerly carsales.com Ltd) since 2022 — 49% acquired 2021,
+    remaining 51% acquired from Eurazeo and Goldman Sachs Asset Management in 2022.
+  source: https://www.traderinteractive.com/carsales-com-ltd-to-purchase-100-of-trader-interactive/

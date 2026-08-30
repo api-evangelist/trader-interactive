@@ -1,0 +1,77 @@
+generated: '2026-08-30'
+method: probed
+source: live GET probes on 2026-08-30 with a browser User-Agent
+note: >-
+  No /.well-known document is served on any Trader Interactive host. www.traderinteractive.com returns a
+  genuine 404 (WordPress) for every path. www.traderonline.com answers 200 with the same 136,361-byte
+  HTML redirect shell for EVERY path including /robots.txt — a catch-all, not a document — so those 200s
+  are recorded as misses. api.traderonline.com is an AWS API Gateway that answers every path with
+  403 {"message":"Missing Authentication Token"}, so nothing there is anonymously readable.
+  dealers.traderinteractive.com (the TraderTraxx dealer portal, Nuxt SSR) returns clean 404s.
+  No WellKnown or SecurityTxt pointer is emitted, because nothing was served.
+hosts:
+  - host: www.traderinteractive.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+      - path: /llms.txt
+        status: 404
+      - path: /robots.txt
+        status: 200
+        note: served, but a robots.txt is not a .well-known document
+  - host: api.traderonline.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 403
+        note: 'AWS API Gateway: {"message":"Missing Authentication Token"}'
+      - path: /.well-known/openid-configuration
+        status: 403
+      - path: /.well-known/oauth-authorization-server
+        status: 403
+      - path: /.well-known/api-catalog
+        status: 403
+      - path: /.well-known/agent-card.json
+        status: 403
+      - path: /.well-known/agent.json
+        status: 403
+  - host: dealers.traderinteractive.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /llms.txt
+        status: 404
+  - host: www.traderonline.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        note: >-
+          soft-200 catch-all — identical 136,361-byte HTML "Redirecting to
+          https://www.traderinteractive.com" shell returned for every path. Not a document.
+      - path: /.well-known/agent-card.json
+        status: 200
+        note: same soft-200 catch-all shell; NOT an agent card
+      - path: /.well-known/api-catalog
+        status: 200
+        note: same soft-200 catch-all shell

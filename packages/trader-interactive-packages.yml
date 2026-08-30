@@ -1,0 +1,137 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  https://github.com/traderinteractive (org listing), https://repo.packagist.org/p2/traderinteractive/*.json,
+  https://registry.npmjs.org/tol-api
+note: >-
+  Trader Interactive publishes 33 public repositories under github.com/traderinteractive ("Open Source
+  projects at Trader Interactive, LLC", contact opensource@traderinteractive.com). Only two of them are
+  clients for the company's own API — the PHP and Node.js clients for the TraderOnline (TOL) REST APIs.
+  The rest are general-purpose PHP libraries the company maintains and are recorded here as first-party
+  libraries, not as SDKs for the TOL API. Versions and dates were read from the registry metadata
+  endpoints on 2026-08-30.
+sdk_count: 2
+package_count: 10
+packages:
+  - name: traderinteractive/tol-api
+    role: api-client
+    registry: packagist
+    language: PHP
+    official: true
+    url: https://packagist.org/packages/traderinteractive/tol-api
+    repository: https://github.com/traderinteractive/tol-api-php
+    install: composer require traderinteractive/tol-api
+    version: v5.1.0
+    published: '2024-11-11'
+    license: MIT
+    description: PHP client library for REST APIs like the TraderOnline (TOL) APIs.
+    note: >-
+      Latest release predates this profile by ~21 months; the repository default branch was last pushed
+      2025-12-02, so maintenance continues without a tagged release.
+  - name: tol-api
+    role: api-client
+    registry: npm
+    language: JavaScript
+    official: true
+    url: https://www.npmjs.com/package/tol-api
+    repository: https://github.com/traderinteractive/tol-api-nodejs
+    install: npm install tol-api
+    version: 0.8.11
+    published: '2022-05-09'
+    license: null
+    description: TraderOnline api client (Node.js).
+    note: >-
+      Pre-1.0 and last published 2022-05-09; the npm record carries no repository field and a single
+      maintainer. This is the strongest decay signal available for the TOL API surface.
+  - name: traderinteractive/tol-api-js
+    role: api-client
+    registry: none
+    language: JavaScript
+    official: true
+    url: https://github.com/traderinteractive/tol-api-js
+    repository: https://github.com/traderinteractive/tol-api-js
+    version: null
+    published: null
+    note: >-
+      jQuery client for the TOL API. Never published to a registry and last pushed 2014-05-29 — recorded
+      for completeness, not counted as a live SDK.
+  - name: traderinteractive/util
+    role: library
+    registry: packagist
+    language: PHP
+    official: true
+    url: https://packagist.org/packages/traderinteractive/util
+    version: v4.0.1
+    published: '2026-01-06'
+    description: A collection of PHP utility classes.
+  - name: traderinteractive/filter
+    role: library
+    registry: packagist
+    language: PHP
+    official: true
+    url: https://packagist.org/packages/traderinteractive/filter
+    version: v4.4.0
+    published: '2025-03-10'
+    description: Filtering implementation for verifying and normalizing input data.
+  - name: traderinteractive/exceptions
+    role: library
+    registry: packagist
+    language: PHP
+    official: true
+    url: https://packagist.org/packages/traderinteractive/exceptions
+    version: v2.1.0
+    published: '2025-10-07'
+    description: Collection of standard exception classes.
+  - name: traderinteractive/netacuity
+    role: library
+    registry: packagist
+    language: PHP
+    official: true
+    url: https://packagist.org/packages/traderinteractive/netacuity
+    version: v5.4.0
+    published: '2025-07-03'
+    description: PHP client for NetAcuity, a third-party geoip lookup service.
+  - name: traderinteractive/image-util
+    role: library
+    registry: packagist
+    language: PHP
+    official: true
+    url: https://packagist.org/packages/traderinteractive/image-util
+    version: v4.2.2
+    published: '2025-08-07'
+    description: A collection of image utilities.
+  - name: traderinteractive/memoize
+    role: library
+    registry: packagist
+    language: PHP
+    official: true
+    url: https://packagist.org/packages/traderinteractive/memoize
+    version: v3.0.0
+    published: '2024-08-13'
+    description: Library for memoizing repeated function calls.
+  - name: traderinteractive/mongo-queue
+    role: library
+    registry: packagist
+    language: PHP
+    official: true
+    url: https://packagist.org/packages/traderinteractive/mongo-queue
+    version: v4.1.0
+    published: '2023-08-04'
+    description: Message queue using MongoDB as a backend.
+registries_checked:
+  - registry: packagist
+    result: 24 packages under the traderinteractive vendor namespace
+  - registry: npm
+    result: tol-api present (0.8.11)
+  - registry: pypi
+    result: no first-party package found
+  - registry: maven-central
+    result: no first-party package found
+  - registry: nuget
+    result: no first-party package found (mongo-queue-csharp is unpublished source only)
+  - registry: rubygems
+    result: no first-party package found
+  - registry: crates.io
+    result: no first-party package found
+  - registry: pkg.go.dev
+    result: no first-party package found

@@ -1,0 +1,96 @@
+generated: '2026-08-30'
+method: derived
+source: >-
+  https://github.com/traderinteractive/tol-api-php (README.md, src/Client.php, src/Collection.php),
+  https://github.com/traderinteractive/tol-api-nodejs (README.md, lib/api.js)
+note: >-
+  Derived from the first-party TOL API clients Trader Interactive publishes. These are the only public
+  statement of the API's cross-cutting semantics; the company publishes no conventions or style guide.
+api: TraderOnline (TOL) API
+auth_style:
+  scheme: OAuth 2.0 bearer token
+  detail: See authentication/trader-interactive-authentication.yml
+pagination:
+  style: offset-limit
+  request_params:
+    - offset
+    - limit
+  response_envelope:
+    result: array of items
+    pagination:
+      - limit
+      - offset
+      - total
+  evidence: >-
+    tol-api-php Collection.php reads $response['pagination']['limit'] and ['total'] and advances
+    $this->filters['offset']; tol-api-nodejs indexAll() iterates
+    offset += pageSize while offset < body.pagination.total.
+  cursor_support: false
+response_envelope:
+  index: '{ "result": [ ... ], "pagination": { "limit": n, "offset": n, "total": n } }'
+  create: '{ "result": { ... } }'
+  error: '{ "error": { "message": "..." } }'
+methods:
+  index: GET /{resource} -> 200
+  get: GET /{resource}/{id} -> 200
+  create: POST /{resource} -> 201
+  update: PUT /{resource}/{id} -> 200
+  delete: DELETE /{resource}/{id} -> 204
+concurrency:
+  async_requests: >-
+    The PHP client supports pipelined requests via startGet/startIndex/startPost + end(), so the API
+    tolerates concurrent in-flight requests from one credential.
+idempotency:
+  supported: false
+  header: null
+  scope: null
+  retention: null
+  note: >-
+    Neither first-party client sends or documents an idempotency key, and no retry-safety semantics are
+    described. A repeated POST creates a duplicate. No Idempotency pointer is emitted.
+versioning:
+  style: path
+  pattern: '{baseUrl}/v{n}'
+  evidence: >-
+    tol-api-nodejs documents apiUrl as "The url to send API requests to. '/v and the version number you
+    wish to use."; the PHP README example uses 'https://baseApiUrl/v1'.
+  policy_published: false
+rate_limit_signaling:
+  documented: false
+  headers: []
+  note: >-
+    No rate-limit headers are read or handled by either client and no limits are published.
+    See rate-limits/trader-interactive-rate-limits.yml.
+request_id_tracing:
+  supported: unknown
+  note: No correlation or request-id header is set or read by the first-party clients.
+field_expansion:
+  supported: unknown
+  note: >-
+    Arbitrary query filters are passed through by both clients (index($resource, $filters)), but no
+    expansion or sparse-fieldset vocabulary is documented.
+caching:
+  client_side: >-
+    The PHP client accepts any PSR-16 SimpleCache implementation and suggests
+    subjective-php/psr-cache-mongodb for MongoDB-backed caching. This is client-side caching, not a
+    documented HTTP caching contract.
+  http_cache_headers: unknown
+error_envelope:
+  shape: '{ "error": { "message": "..." } }'
+  rfc9457: false
+  detail: See errors/trader-interactive-problem-types.yml
+reversibility:
+  grade: undocumented
+  write_surface: true
+  note: >-
+    The TOL API has a write surface — the first-party clients implement POST, PUT and DELETE against
+    arbitrary resources — but Trader Interactive publishes no reversal operations and no windows. No
+    cancel, restore, undelete, or soft-delete semantics appear in the client source or README, and there
+    is no public reference to read one from. This is recorded as undocumented rather than `na`: the
+    write surface exists, so an agent acting against it has no published way to know whether a DELETE is
+    recoverable.
+  operations: []
+  windows: []
+dry_run_mode:
+  supported: unknown
+  note: No dry-run, preview, or validate-only mode is documented or implemented by either client.

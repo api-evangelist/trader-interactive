@@ -1,23 +1,112 @@
 aid: trader-interactive
 name: Trader Interactive
-description: 'Trader Interactive is a company surfaced via the API Evangelist harvest backlog (source:
-  secondary-market) and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Trader Interactive is a Norfolk, Virginia digital marketplace and dealer-services company operating a
+  portfolio of vertical vehicle marketplaces — RV Trader, Cycle Trader, ATV Trader, PWC Trader, Snowmobile
+  Trader, Aero Trader, Boatmart, Trade-A-Plane, Commercial Truck Trader, Equipment Trader, Next Truck,
+  Rock & Dirt and Tradequip — alongside the Commercial Web Services and RV Web Services dealer website
+  businesses and Statistical Surveys market research. It reaches over 13 million monthly unique visitors
+  and has been wholly owned by CAR Group (formerly carsales.com Ltd) since 2022. Its integration surface
+  is the TraderOnline (TOL) REST API, served from api.traderonline.com behind AWS API Gateway and consumed
+  by dealers and syndication partners through first-party OAuth 2.0 client-credentials clients that Trader
+  Interactive publishes as open source on GitHub, Packagist and npm. There is no public developer portal,
+  no published API reference, and no machine-readable specification.
+image: https://www.traderinteractive.com/wp-content/uploads/2026/08/TI-favicon.png
 url: https://raw.githubusercontent.com/api-evangelist/trader-interactive/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-08-30'
 modified: '2026-08-30'
 tags:
-- Company
-apis: []
+  - Company
+  - Marketplace
+  - Classifieds
+  - Automotive
+  - Powersports
+  - Recreational Vehicles
+  - Commercial Trucks
+  - Heavy Equipment
+  - Dealer Services
+  - Digital Advertising
+  - Vehicle Listings
+  - Media
+apis:
+  - aid: trader-interactive:tol-api
+    name: TraderOnline (TOL) API
+    description: >-
+      The TraderOnline REST API is the integration surface behind Trader Interactive's marketplace
+      network. It is an OAuth 2.0 protected, JSON, offset/limit paginated REST API served from
+      api.traderonline.com. Trader Interactive does not publish a public reference or specification for
+      it; the only public description of its wire contract is the source and README of the first-party
+      PHP and Node.js clients the company maintains under github.com/traderinteractive.
+    humanURL: https://github.com/traderinteractive/tol-api-php
+    baseURL: https://api.traderonline.com
+    tags:
+      - Vehicle Listings
+      - Inventory
+      - Classifieds
+    properties:
+      - type: SourceCode
+        url: https://github.com/traderinteractive/tol-api-php
+      - type: Authentication
+        url: authentication/trader-interactive-authentication.yml
+      - type: Conventions
+        url: conventions/trader-interactive-conventions.yml
+      - type: ErrorCatalog
+        url: errors/trader-interactive-problem-types.yml
 maintainers:
-- FN: Kin Lane
-  email: kin@apievangelist.com
-- FN: APIs.json
-  email: info@apis.io
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+  - FN: APIs.json
+    email: info@apis.io
 common:
-- type: Website
-  url: https://forgeglobal.com/trader-interactive_stock/
+  - type: Website
+    url: https://www.traderinteractive.com/
+  - type: About
+    url: https://www.traderinteractive.com/about-us/
+  - type: Blog
+    url: https://www.traderinteractive.com/blog/
+  - type: BlogRSS
+    url: https://www.traderinteractive.com/feed/
+  - type: Press
+    url: https://www.traderinteractive.com/newsroom/
+  - type: Support
+    url: https://www.traderinteractive.com/contact/
+  - type: HelpCenter
+    url: https://www.traderinteractive.com/tradertraxxhelp/
+  - type: Login
+    url: https://dealers.traderinteractive.com/tradertraxx/login
+  - type: TermsOfService
+    url: https://www.traderinteractive.com/terms/
+  - type: PrivacyPolicy
+    url: https://www.traderinteractive.com/privacy/
+  - type: GitHubOrganization
+    url: https://github.com/traderinteractive
+  - type: Packages
+    url: packages/trader-interactive-packages.yml
+  - type: SDKs
+    url: packages/trader-interactive-packages.yml
+  - type: Authentication
+    url: authentication/trader-interactive-authentication.yml
+  - type: Conventions
+    url: conventions/trader-interactive-conventions.yml
+  - type: ErrorCatalog
+    url: errors/trader-interactive-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/trader-interactive-lifecycle.yml
+  - type: Conformance
+    url: conformance/trader-interactive-conformance.yml
+  - type: RateLimits
+    url: rate-limits/trader-interactive-rate-limits.yml
+  - type: Plans
+    url: plans/trader-interactive-plans-pricing.yml
+  - type: LLMsTxt
+    url: llms/trader-interactive-llms.txt
+  - type: DomainSecurity
+    url: security/trader-interactive-domain-security.yml
+x-enrichment:
+  date: '2026-08-30'
+  status: enriched
+  artifacts_added: 12
+  pass: local-v1

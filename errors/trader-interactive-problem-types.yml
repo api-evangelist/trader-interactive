@@ -1,0 +1,63 @@
+generated: '2026-08-30'
+method: derived
+source: >-
+  https://github.com/traderinteractive/tol-api-php (README.md, src/Client.php),
+  https://github.com/traderinteractive/tol-api-nodejs/blob/master/lib/api.js
+note: >-
+  Trader Interactive publishes no error reference. This catalog is derived from the error handling in the
+  two first-party TOL API clients — the status codes they check and the response bodies they parse. It
+  describes the envelope and the codes the clients are written against, not a published contract.
+format: vendor-json
+rfc9457: false
+envelope: '{ "error": { "message": "<string>" } }'
+oauth_envelope: '{ "error": "<oauth2 error code>" }'
+error_count: 7
+errors:
+  - status: 400
+    title: Bad request
+    envelope: '{ "error": { "message": "..." } }'
+    remediation: Correct the request body or query filters.
+    evidence: tol-api-nodejs rejects on res.statusCode >= 400 with {res, body}.
+  - status: 401
+    code: invalid_grant
+    title: Expired or invalid access token
+    envelope: '{ "error": "invalid_grant" }'
+    remediation: >-
+      Re-authenticate at {baseUrl}/token and retry. Both first-party clients detect this pair
+      (401 + error === 'invalid_grant') and refresh the token transparently.
+    evidence: tol-api-nodejs isExpiredToken() -> res.statusCode == 401 && body.error === 'invalid_grant'.
+  - status: 403
+    title: Missing authentication token
+    envelope: '{ "message": "Missing Authentication Token" }'
+    remediation: Present a bearer token; this is the AWS API Gateway response for an unauthenticated request.
+    evidence: Probed https://api.traderonline.com/ on 2026-08-30 -> 403 with this body.
+  - status: 404
+    title: Resource not found
+    remediation: Verify the resource name and id.
+  - status: 500
+    title: Server error
+    remediation: Retry with backoff; the clients surface the raw body.
+  - status: 'null'
+    code: missing-id
+    title: Client-side validation - an id is required
+    envelope: '{ "error": { "message": "An id is required" } }'
+    remediation: >-
+      Emitted by the client, not the server, when get/put/delete is called without an id. Included
+      because it shares the published error envelope shape.
+    evidence: 'tol-api-nodejs rejects with {error: {message: "An id is required"}}.'
+  - status: 'null'
+    code: invalid-response
+    title: Unparseable response body
+    envelope: '{ "error": "Invalid response: <body>" }'
+    remediation: Client-side guard when the response body is not JSON.
+success_codes:
+  - status: 200
+    used_by: [index, get, put]
+  - status: 201
+    used_by: [post]
+  - status: 204
+    used_by: [delete]
+gaps:
+  - No published error reference or error code list.
+  - Errors are not RFC 9457 application/problem+json.
+  - No documented machine-readable error code vocabulary beyond the OAuth 2.0 codes.

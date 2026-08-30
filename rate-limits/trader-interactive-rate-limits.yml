@@ -1,0 +1,25 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  https://www.traderinteractive.com/ (site crawl 2026-08-30),
+  https://github.com/traderinteractive/tol-api-php, https://github.com/traderinteractive/tol-api-nodejs
+note: >-
+  Trader Interactive publishes no rate limits for the TraderOnline API and no developer documentation in
+  which to publish them. Neither first-party client reads a rate-limit header, handles a 429, or
+  implements backoff — which is itself evidence that no runtime rate-limit signal is contracted. An
+  honest zero.
+api: TraderOnline (TOL) API
+limit_count: 0
+limits: []
+headers: []
+exhaustion_status: unknown
+retry_after: unknown
+evidence:
+  - url: https://www.traderinteractive.com/
+    status: 200
+    finding: No developer or API section anywhere in the site navigation or sitemap.
+  - url: https://api.traderonline.com/
+    status: 403
+    finding: >-
+      AWS API Gateway returns {"message":"Missing Authentication Token"} to every anonymous request, so
+      no live rate-limit headers can be observed without credentials.

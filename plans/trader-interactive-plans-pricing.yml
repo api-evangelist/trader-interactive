@@ -1,0 +1,25 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  https://www.traderinteractive.com/ , https://www.traderinteractive.com/advertise/ ,
+  probe of https://www.traderinteractive.com/pricing/ (404) on 2026-08-30
+note: >-
+  Trader Interactive publishes no pricing of any kind — not for API access and not for the dealer
+  advertising packages its marketplaces sell. The whole commercial motion runs through a "Partner With
+  Us" contact form and the TraderTraxx dealer relationship. No Pricing pointer is emitted, because there
+  is no pricing page to point at.
+plan_count: 0
+plans: []
+pricing_model: contact-sales
+api_pricing_published: false
+evidence:
+  - url: https://www.traderinteractive.com/pricing/
+    status: 404
+  - url: https://www.traderinteractive.com/advertise/
+    status: 200
+    finding: Dealer advertising overview with a contact form; no rates, tiers, or quotas.
+  - url: https://dealers.traderinteractive.com/tradertraxx/login
+    status: 200
+    finding: >-
+      TraderTraxx dealer portal login. Inventory, lead and reporting tooling — and any commercial
+      terms — sit behind it.

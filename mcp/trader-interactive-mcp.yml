@@ -1,0 +1,22 @@
+generated: '2026-08-30'
+method: searched
+source: >-
+  https://github.com/traderinteractive (33 public repos), web search for "Trader Interactive MCP server",
+  probes of api.traderonline.com and dealers.traderinteractive.com
+status: none
+note: >-
+  Trader Interactive ships no MCP server, hosted or local. The only MCP-adjacent artifact in the GitHub
+  org is tauri-plugin-mcp — a Tauri debugging plugin that lets coding agents inspect a desktop app; it is
+  not a server for the TraderOnline API and is not counted. No candidate tool list could be derived
+  either: the pipeline derives candidates from OpenAPI operations and Trader Interactive publishes no
+  OpenAPI, so there are no named operations to bind tools to. Deriving tool names from the generic
+  resource examples in the SDK README ("resourceName") would be fabrication.
+  No MCPServer pointer is emitted.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: searched
+tools: []

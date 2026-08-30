@@ -1,0 +1,76 @@
+# Trader Interactive
+
+> Trader Interactive is a Norfolk, Virginia digital marketplace and dealer-services company operating a
+> portfolio of vertical vehicle marketplaces and dealer website businesses. It reaches over 13 million
+> monthly unique visitors and has been wholly owned by CAR Group (formerly carsales.com Ltd) since 2022.
+
+Generated: 2026-08-30
+Method: generated
+Source: apis.yml and the artifacts in this repository. Trader Interactive serves no llms.txt of its own
+(https://www.traderinteractive.com/llms.txt returned 404 on 2026-08-30).
+
+## What an agent needs to know first
+
+- There is **no public API documentation, no developer portal, and no machine-readable specification**.
+- The integration surface is the **TraderOnline (TOL) REST API** at `https://api.traderonline.com`,
+  fronted by AWS API Gateway. Every anonymous request returns
+  `403 {"message":"Missing Authentication Token"}`.
+- Credentials (OAuth 2.0 client id + secret) are issued to dealers and syndication partners through the
+  TraderTraxx dealer relationship. There is no self-serve signup for API access.
+- The only public description of the API's wire contract is the source of the two first-party client
+  libraries Trader Interactive maintains as open source.
+- Trader Interactive ships **no MCP server** and **no A2A agent card**.
+
+## Marketplaces
+
+- Recreational: RV Trader, Cycle Trader, ATV Trader, PWC Trader, Snowmobile Trader, Boatmart,
+  Aero Trader, Trade-A-Plane
+- Commercial: Commercial Truck Trader, Equipment Trader, Next Truck, Rock & Dirt, Tradequip
+- Dealer services: Commercial Web Services, RV Web Services, Statistical Surveys Inc.
+
+## API
+
+- [TraderOnline (TOL) API](https://github.com/traderinteractive/tol-api-php): OAuth 2.0 protected JSON
+  REST API. Base `https://api.traderonline.com`, version in the path (`/v1`). Offset/limit pagination
+  with a `{ result: [...], pagination: { limit, offset, total } }` envelope. POST returns 201, PUT 200,
+  DELETE 204. Errors are `{ "error": { "message": "..." } }` — not RFC 9457.
+
+## Client libraries (first-party)
+
+- [traderinteractive/tol-api (PHP)](https://packagist.org/packages/traderinteractive/tol-api) — v5.1.0,
+  published 2024-11-11. `composer require traderinteractive/tol-api`
+- [tol-api (Node.js)](https://www.npmjs.com/package/tol-api) — 0.8.11, published 2022-05-09.
+  `npm install tol-api`
+- [tol-api-js](https://github.com/traderinteractive/tol-api-js) — jQuery client, unmaintained since 2014,
+  never published to a registry.
+
+## Repository artifacts
+
+- [Authentication](authentication/trader-interactive-authentication.yml) — OAuth 2.0 client_credentials,
+  password and refresh_token grants against `{baseUrl}/token`.
+- [Conventions](conventions/trader-interactive-conventions.yml) — pagination, versioning, envelopes,
+  reversibility (undocumented), idempotency (not supported).
+- [Error catalog](errors/trader-interactive-problem-types.yml)
+- [Lifecycle](lifecycle/trader-interactive-lifecycle.yml) — no deprecation policy, no status page, no SLA.
+- [Conformance](conformance/trader-interactive-conformance.yml)
+- [Packages](packages/trader-interactive-packages.yml)
+- [Rate limits](rate-limits/trader-interactive-rate-limits.yml) — none published.
+- [Plans and pricing](plans/trader-interactive-plans-pricing.yml) — none published; contact-sales only.
+- [Well-known probe](well-known/trader-interactive-well-known.yml) — nothing served on any host.
+- [MCP](mcp/trader-interactive-mcp.yml) — no server.
+- [Domain security](security/trader-interactive-domain-security.yml) — TLS 1.3, SPF and DMARC p=reject
+  on both domains; no DNSSEC, no CAA, no HSTS.
+
+## Company
+
+- [Website](https://www.traderinteractive.com/)
+- [About](https://www.traderinteractive.com/about-us/)
+- [Blog](https://www.traderinteractive.com/blog/)
+- [Newsroom](https://www.traderinteractive.com/newsroom/)
+- [Contact](https://www.traderinteractive.com/contact/)
+- [TraderTraxx help center](https://www.traderinteractive.com/tradertraxxhelp/)
+- [TraderTraxx dealer login](https://dealers.traderinteractive.com/tradertraxx/login)
+- [GitHub organization](https://github.com/traderinteractive) — 33 public repositories,
+  opensource@traderinteractive.com
+- [Terms](https://www.traderinteractive.com/terms/)
+- [Privacy](https://www.traderinteractive.com/privacy/)

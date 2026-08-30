@@ -1,0 +1,83 @@
+generated: '2026-08-30'
+method: derived
+source: >-
+  https://github.com/traderinteractive/tol-api-php/blob/master/src/Authentication.php,
+  https://github.com/traderinteractive/tol-api-nodejs/blob/master/lib/api.js,
+  https://www.traderinteractive.com/security-center/, https://www.traderinteractive.com/privacy/
+note: >-
+  Assertions are made only where a first-party artifact demonstrates the behaviour. Trader Interactive
+  publishes no compliance program, no certifications and no standards claims, so no Compliance or
+  TrustCenter pointer is emitted.
+standards:
+  - id: oauth2
+    name: OAuth 2.0 (RFC 6749)
+    conforms: true
+    evidence: >-
+      Both first-party TOL API clients implement the client_credentials, password and refresh_token
+      grants against a {baseUrl}/token endpoint and carry the access token as a bearer credential.
+      The PHP client notes a non-standard refresh resource because the API is fronted by Apigee.
+  - id: oidc
+    name: OpenID Connect
+    conforms: false
+    evidence: >-
+      No /.well-known/openid-configuration on any host (probed 2026-08-30, 404/403), and no ID token
+      handling in either client.
+  - id: rfc9457
+    name: RFC 9457 Problem Details for HTTP APIs
+    conforms: false
+    evidence: >-
+      Error envelope is a vendor shape {"error": {"message": ...}}; no application/problem+json.
+  - id: pagination
+    name: Offset/limit pagination
+    conforms: true
+    evidence: >-
+      Documented and implemented request params offset + limit with a
+      pagination {limit, offset, total} response block (tol-api-php Collection.php,
+      tol-api-nodejs indexAll()).
+  - id: idempotency
+    name: Idempotency keys
+    conforms: false
+    evidence: No idempotency key is sent, documented, or handled by either first-party client.
+  - id: json-api
+    name: 'JSON:API'
+    conforms: false
+    evidence: Response envelope is a vendor result/pagination shape, not a JSON:API document.
+  - id: odata
+    name: OData
+    conforms: false
+    evidence: No $metadata surface; api.traderonline.com answers 403 to every anonymous path.
+  - id: scim
+    name: SCIM
+    conforms: false
+    evidence: No SCIM schema URNs appear in any published artifact.
+domain_standards:
+  market: Vertical vehicle classifieds and dealer inventory syndication
+  candidates_probed:
+    - id: adf-xml
+      name: ADF/XML (Auto-Lead Data Format)
+      conforms: unknown
+      evidence: >-
+        ADF/XML is the de facto lead-delivery standard for automotive marketplaces, and Trader
+        Interactive's marketplaces deliver leads to dealer CRMs. Nothing in the public surface declares
+        it: the contract is not published, and no first-party artifact mentions ADF. Recorded as unknown
+        rather than asserted.
+    - id: star-jsonapi
+      name: STAR (Standards for Technology in Automotive Retail)
+      conforms: unknown
+      evidence: No public reference to STAR standards in any Trader Interactive artifact.
+  note: >-
+    REWARD-ONLY check. No domain standard is declared by any published Trader Interactive contract,
+    because no contract is published. This is not scored against the provider.
+compliance_program:
+  published: false
+  certifications: []
+  evidence:
+    - url: https://www.traderinteractive.com/security-center/
+      status: 200
+      finding: >-
+        Consumer fraud-awareness guidance and a fraud@traderinteractive.com reporting address. No SOC 2,
+        ISO 27001, PCI DSS, HIPAA or FedRAMP claim, no trust center, no vulnerability disclosure policy.
+    - url: https://www.traderinteractive.com/privacy/
+      status: 200
+      finding: >-
+        US state privacy notice (CCPA/CPRA-style rights). A privacy policy, not a compliance program.
