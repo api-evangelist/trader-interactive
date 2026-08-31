@@ -1,0 +1,21 @@
+{
+  "repo": "trader-interactive",
+  "feeds": [
+    {
+      "source": "https://www.traderinteractive.com/about-us/",
+      "feed_url": "https://www.traderinteractive.com/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    },
+    {
+      "source": "https://www.traderinteractive.com/blog/",
+      "feed_url": "https://www.traderinteractive.com/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 0,
+  "fetched": "2026-08-30T22:33:40Z"
+}
