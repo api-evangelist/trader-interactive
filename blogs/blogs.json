@@ -16,6 +16,20 @@
       "method": "discovered"
     },
     {
+      "source": "https://www.traderinteractive.com/blog/feed/",
+      "feed_url": "https://www.traderinteractive.com/blog/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
+      "source": "https://www.traderinteractive.com/about-us/blog/feed/",
+      "feed_url": "https://www.traderinteractive.com/about-us/blog/feed/",
+      "title": "",
+      "saved": 0,
+      "method": "feed"
+    },
+    {
       "source": "https://www.traderinteractive.com/feed/",
       "feed_url": "https://www.traderinteractive.com/feed/",
       "title": "",
@@ -24,5 +38,5 @@
     }
   ],
   "post_count": 10,
-  "fetched": "2026-09-06T19:17:18Z"
+  "fetched": "2026-09-13T13:00:00Z"
 }
